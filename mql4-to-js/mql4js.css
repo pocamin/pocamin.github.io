@@ -1,0 +1,60 @@
+h1, h2, h3, h4, h5, h6 {
+    color: #7070A0;
+}
+
+span.error {
+    color: red;
+}
+
+span.log {
+    color: white;
+}
+
+pre #log {
+    background: black;
+    height: 500px;
+    overflow: scroll;
+    width: 100%;
+    display: block;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    min-height: 300px;
+
+}
+
+table {
+    width: 100%;
+
+}
+
+td, th {
+    padding: 5px;
+}
+
+td {
+    background-color: #fafafc;
+}
+
+th {
+    background-color: #e6e6fa;
+    text-align: left;
+
+}
+
+div.row {
+    float: left;
+    width: 700px;
+    margin-left: 50px;
+}
+
+.warning {
+    border: 1px solid #d8bfd8;;
+    background-color: #f8dff8;
+    border-radius: 5px;
+    padding: 3px 15px;
+    margin: 15px 0;
+    color: darkred;
+}

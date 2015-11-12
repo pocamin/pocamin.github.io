@@ -1,0 +1,54 @@
+/* Put your CSS here */
+* {
+    color: #303030;
+}
+.ember-application {
+    margin: 20px;
+}
+
+.computed {
+    color: #00008b;
+
+}
+
+.computed .good{
+    color: #006400;
+}
+
+.computed .bad{
+    color: #8b0000;
+    font-weight: bold;
+}
+
+table th{
+    border: 1px solid #707070;
+    background-color: #707070;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+
+
+table td{
+    border: 1px solid #707070;
+    text-align: center;
+    padding: 5px;
+}
+
+
+
+.notice{
+    border: 1px solid #5890ff;
+    background: #98d7ed;
+    color: #000;
+    font-style: italic;
+    padding: 5px;
+    display: none;
+
+}
+
+
+.chi2-details{
+    display: none;
+}

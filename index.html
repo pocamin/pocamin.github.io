@@ -1,131 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Monte carlos project estimation</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <title>Pocamin</title>
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
+<h1>Pocamin project archive</h1>
 
-  <script type="text/x-handlebars">
-    <h2>Monte carlos project estimation <button {{action 'help'}}>HELP !!!</button></h2>
-    <p class="notice">
-    The purpose of this tool is to help you to estimate some scope of the project. <br/>
-    It assumes that the past is a good enough indicator for the future. <br/><br/>
-    But it provide you also one tool to assess if this proposition is true. <br/>
-    If your data is not reliable, it doesn't only means that this tool is not for you but also that there is no reason to continue your estimation.
-    </p>
-    {{outlet}}
-  </script>
+<h2>Who am I</h2>
 
-  <script type="text/x-handlebars" id="index">
-    <h3> historical data </h3>
-    <p class="notice">
-    Start here ! you need to provide data from the past in order to predict the future.<br>
-    format is one line by "category : observed values"<br>
-    Observed value should be summable values like time logged.
-    </p>
-    {{textarea value=model.histoAsStr cols="80" rows="6"}}<br/>
-    <button {{action 'refresh' model}}>Refresh</button>
-
-    <h3> Your data quality <button {{action 'showDetails'}}>Show/hide details</button> </h3>
-    <p class="notice">
-    This is an statistical estimation of the quality of your data based on a model created with part of your data and tested with the other part.<br>
-    Since we are using χ² tests to validate your data, we need to make your data discreet. <br>
-    Then your data are split in order to create partition of same size having at least one element in it.<br>
-    That not perfect for managing extreme values (You may need to manually smooth your data).<br>
-    furthermore, you should provide a certain amount of entry by category in order to evaluate your data reliability
-    </p>
+<div>
     <ul>
-    {{#each item in model.histo}}
-      <li>For category <span class="computed">{{item.id}}</span>
-      there are <span class="computed">{{item.nbData}}</span> historical results <br/>
-      {{chi2-result value=item.testCHI2}}
-      </li>
-    {{/each}}
+        <li>
+            My blog : <a href="http://java-bien.blogspot.ch/">@Benjamin_Leroux Agile, testing and development</a>
+        </li>
+        <li>
+            My twitter : <a href="https://twitter.com/benjamin_leroux">@Benjamin_Leroux</a>
+        </li>
+        <li>
+            My outdated linkedin : <a href="https://www.linkedin.com/in/benjamin-leroux-1810a624">Benjamin LEROUX</a>
+        </li>
     </ul>
+</div>
+<h2>What I do</h2>
+
+<div class="project">
+    <h1>MQL4 to JS</h1>
+    <img src="img/mql4-to-js.png" >
+
+    <div>
+        A source converter from MQL4 file (C like language for forex trading) to javascript in javascript <br/>
+        And a runner for this generated JS files <br/>
+    </div>
+    <a href="mql4-to-js/index.html" class="website">WWW</a>
+    |
+    <a href="https://github.com/pocamin/mql4js" class="code">Code</a>
+</div>
+
+<div class="project">
+    <h1>jBehave JBEL</h1>
+    <img src="img/JBEL.png" >
+
+    <div>
+        A scripting language for jBehave in order to switch from story written with example style to story written in behavior style
+    </div>
+    <a href="https://github.com/pocamin/jbehave-jbel" class="code">Code</a>
+</div>
 
 
+<div class="project">
+    <h1>Monte carlo project estimation</h1>
+    <img src="img/mcpe.png" >
+
+    <div>
+        The purpose of this tool is to help you to do estimation of your project based on previous performance of your team.<br/>
+        It uses monte carlos analysis
+    </div>
+    <a href="MonteCarloProjectEstimation/index.html" class="website">WWW</a>
+    |
+    <a href="https://github.com/pocamin/statistical-project-estimation" class="code">Code</a>
+</div>
 
 
-    <h3> Your simulation </h3>
-        <p class="notice">
-        You need to provide the number of items in each of your categories for the part that you want to estimate (For instance the whole project, some sprints, 2 days)<br/>
-        You have to take into account that changes in your team may have big impact on the velocity.
-        </p>
-
-
-    <table class="simulation">
-    <tr><th>category</th><th>Number of items</th></tr>
-    {{#each item in model.histo}}
-    <tr><td>{{item.id}}</td>
-        <td>
-        {{input type="text" value=item.nbItemToEstimate }}
-        </td>
-    </tr>
-    {{/each}}
-
-
-    <tr>
-        <td colspan="2">
-        {{view "select" content=model.possibleSimulationSize optionValuePath="content.value" optionLabelPath="content.name" value=model.nbSimulations}}
-        </td>
-    </tr>
-
-    </table>
-
-    <h3>Your estimation</h3>
-    <p class="notice">
-        For this estimation we suppose that the time to do one item of one category will remains more or less identical in the future. <br/>
-        Extreme values are as likely to happen in the future that it used to happens in the past.
-    </p>
-    <ul>
-    {{#each item in model.estimate}}
-      <li class="computed">{{item}}</li>
-    {{/each}}
-    </ul>
-
-
-  </script>
-
-
-  <script type="text/x-handlebars" data-template-name="components/chi2-result">
-      <span class="computed">
-      <span {{bind-attr class=value.resultClass}}>
-      {{value.result}}
-      </span> <br/>
-      <span class="chi2-details">
-      {{#if value.testData}}
-          We used [{{value.testData}}] to test the model.
-          <table class="percent-table">
-          <thead><tr><th>partition</th><th>expected</th><th>actual</th></tr></thead>
-          <tbody>
-          {{#each item in value.percents}}
-          <tr>
-            <td>[{{item.partition}}]</td>
-            <td>{{item.expectedPercent}}</td>
-            <td>{{item.actualPercent}}</td>
-          </tr>
-          {{/each}}
-          </tbody>
-          </table>
-          χ² = {{value.chi2}} and Max(χ²) = {{value.maxChi2}}
-      {{/if}}
-      </span>
-
-
-
-      </span>
-  </script>
-
-  <script src="js/libs/jquery-1.10.2.js"></script>
-  <script src="js/libs/underscore.js"></script>
-  <script src="js/libs/handlebars-v2.0.0.js"></script>
-  <script src="js/libs/ember.debug.js"></script>
-  <script src="js/app.js"></script>
-  <!-- to activate the test runner, add the "?test" query string parameter -->
-  <script src="tests/runner.js"></script>
 </body>
 </html>
